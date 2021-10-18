@@ -26,6 +26,20 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## 学习顺序
+
+### 启动nestjs -- 具体查看main.ts
+
+### 了解controller(控制器) service(服务) module(功能模块)
+所有请求都会有controller中的指定路由接受 根据get、post、put、delete等调取相应 service.ts中的业务方法
+module整合了 对于的controller 和 service 并挂载到app.module.ts中
+
+### 添加swagger插件
+在main.ts中加入swagger插件，配置swagger相关配置，创建swaggerModule,设置访问路径并运行在appModule中
+对于每个接口设置swagger参数需要在接口中 添加 @ApiQuery @ApiBody 等修饰符来具体设置
+
+
+
 ## Installation
 
 ```bash
