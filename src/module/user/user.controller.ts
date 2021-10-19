@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Post, Query, Headers} from "@nestjs/common";
-import { ApiTags, ApiQuery, ApiBearerAuth, ApiResponse, ApiBody } from "@nestjs/swagger";
+import { Body, Controller, Get, Post, Query, Headers, Patch, Param, ParseIntPipe} from "@nestjs/common";
+import { ApiTags, ApiQuery, ApiBearerAuth, ApiResponse, ApiBody, ApiParam } from "@nestjs/swagger";
 import { UserService } from './user.service'
 import { User } from './class/user'
 
@@ -20,8 +20,18 @@ export class UserController {
     })
     // Get方法设定 @Query: id=xxx 此类格式
     getOne(@Query() {id}, @Headers('token') token): string{
-        console.log(token);
+        // console.log(token);
         return this.UserService.getList(id);
+    }
+
+    // patch方式设定  (':id') 是以url为 get/xxx 获取xxx的形式
+    @Patch(':id')
+    @ApiParam({name:'id'})
+    @ApiBody({description:'更新内容啦啦啦'})
+    update(@Param('id', new ParseIntPipe()) id, @Body() {message}): string{
+        console.log(id)
+        console.log(typeof id)
+        return '这里调用了Patch方法'
     }
 
     @Post()

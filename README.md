@@ -38,6 +38,28 @@ module整合了 对于的controller 和 service 并挂载到app.module.ts中
 在main.ts中加入swagger插件，配置swagger相关配置，创建swaggerModule,设置访问路径并运行在appModule中
 对于每个接口设置swagger参数需要在接口中 添加 @ApiQuery @ApiBody 等修饰符来具体设置
 
+### 中间件
+客户端(请求发起端)  ---->   中间件   ---->    nest路由接收(Controller)
+@Injectable()修饰 可注入服务
+中间件必须 implements(实现) NestMiddleware的类
+NestMiddleware里只有一个use方法,需要中间件去实现(复写)
+next() 可串联多个中间件
+
+### exception filter 异常过滤器
+在@Get @Post等接口里可以做验证判断并抛出异常 throw new HttpException 在被局部异常过滤器@UseFilters(new HttpExceptionFilter())处理, HttpExceptionFilter是自定义的过滤器需要import加载进来
+
+也可以使用全局过滤器在main.ts中添加 app.useGlobalFilters(new HttpExceptionFilter())来捕获处理
+
+异常需要implements(实现) ExceptionFilter这个对象中的 catch 方法
+
+### pipe 管道
+转换：管道将输入数据转换为所需的数据输出
+验证：对输入数据进行验证，如果验证成功继续传递; 验证失败则抛出异常;
+例子：update(@Param('id', new ParseIntPipe()) id, @Body() {message}): string  
+new ParseIntPipe就是一个系统内置的管道 转换类型
+自定义管道1： parse-int.pipe.ts
+implements(实现)PipeTransform类 并实现transform方法
+
 
 
 ## Installation
