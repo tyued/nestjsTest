@@ -32,16 +32,21 @@
 
 ### 了解controller(控制器) service(服务) module(功能模块)
 所有请求都会有controller中的指定路由接受 根据get、post、put、delete等调取相应 service.ts中的业务方法
+
 module整合了 对于的controller 和 service 并挂载到app.module.ts中
 
 ### 添加swagger插件
 在main.ts中加入swagger插件，配置swagger相关配置，创建swaggerModule,设置访问路径并运行在appModule中
+
 对于每个接口设置swagger参数需要在接口中 添加 @ApiQuery @ApiBody 等修饰符来具体设置
 
 ### 中间件
 客户端(请求发起端)  ---->   中间件   ---->    nest路由接收(Controller)
+
 @Injectable()修饰 可注入服务
+
 中间件必须 implements(实现) NestMiddleware的类
+
 NestMiddleware里只有一个use方法,需要中间件去实现(复写)
 next() 可串联多个中间件
 
@@ -54,9 +59,12 @@ next() 可串联多个中间件
 
 ### pipe 管道
 转换：管道将输入数据转换为所需的数据输出
+
 验证：对输入数据进行验证，如果验证成功继续传递; 验证失败则抛出异常;
+
 例子：update(@Param('id', new ParseIntPipe()) id, @Body() {message}): string  
 new ParseIntPipe就是一个系统内置的管道 转换类型
+
 自定义管道1： parse-int.pipe.ts
 implements(实现)PipeTransform类 并实现transform方法
 
