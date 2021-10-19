@@ -3,13 +3,14 @@ import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 // import { AppService } from './app.service';
 import { UserModule } from './module/user/user.module'
 import { CatsModule } from './module/cats/cats.module' 
+import { RoleModule } from './module/roleGuard/role-guard.module'
 
 // 引入中间件
 import { LoggerMiddleware } from './common/middleware/logger.middleware'
 
 
 @Module({
-    imports: [UserModule,CatsModule],
+    imports: [UserModule,CatsModule,RoleModule],
   // controllers: [AppController],
   // providers: [AppService],
 })

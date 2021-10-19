@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post, Query, Headers, Patch, Param, ParseIntPipe} from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, Headers, Patch, Param, ParseIntPipe, UsePipes} from "@nestjs/common";
 import { ApiTags, ApiQuery, ApiBearerAuth, ApiResponse, ApiBody, ApiParam } from "@nestjs/swagger";
 import { UserService } from './user.service'
 import { User } from './class/user'
+import {CusParseIntPipe} from '../../common/pipes/parse-int.pipe'
 
 @ApiTags('user')
 @Controller('/user')
@@ -28,9 +29,9 @@ export class UserController {
     @Patch(':id')
     @ApiParam({name:'id'})
     @ApiBody({description:'更新内容啦啦啦'})
-    update(@Param('id', new ParseIntPipe()) id, @Body() {message}): string{
-        console.log(id)
-        console.log(typeof id)
+    update(@Param('id', new CusParseIntPipe()) id, @Body() {message}): string{
+        // console.log(id)
+        // console.log(typeof id)
         return '这里调用了Patch方法'
     }
 
