@@ -66,7 +66,15 @@ next() 可串联多个中间件
 new ParseIntPipe就是一个系统内置的管道 转换类型
 
 自定义管道1： parse-int.pipe.ts
-implements(实现)PipeTransform类 并实现transform方法
+implements(实现)PipeTransform类 并实现transform方法 
+
+### guard 守卫
+@useGuards() 路由上添加守卫
+
+@Get具体发放前添加自定义修饰器 例如 @Roles('admin') 需配合 decorator来运行,设置修饰器名称 export const Roles, 设置关联 SetMetadata(key,value)
+
+guard里需要实现 CanActivate 中的 canActivate方法,具体查看 role.guard.ts
+
 
 
 
