@@ -29,8 +29,10 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware'
                 from:'"姜璀" <rayj0717@vip.qq.com>',
             },
             preview:false,
+            // 模板适配器
             template:{
-                dir: process.cwd() + '/template',
+                // 指定模板目录 然后在service里指定模板文件*.pug 这里用的是pug模板语言
+                dir: process.cwd() + '/src/templates',
                 adapter: new PugAdapter(),
                 options:{
                     strict: true,
