@@ -84,6 +84,9 @@ npm install --save @nestjs-modules/mailer nodemailer 安装依赖
 
 resolve(__dirname) 默认输出地址是 dist目录, 静态模板在src里，需要在nest-cli.json中配置 compilerOptions assets:['templates/**/*'] 这样会把 templates的内容拷贝到dist中
 
+### 项目配置管理 @nestjs/config
+npm install --save @nestjs/config 依赖先装
+
 
 
 ## Installation
