@@ -82,7 +82,7 @@ npm install --save @nestjs-modules/mailer nodemailer 安装依赖
 
 操作过程：用户发起post请求 验证参数 -> controller -> 拉起service中对应的方法处理sendMail 
 
-resolve(__dirname) 默认输出地址是 dist目录, 需在tsconfig.json修改配置项 outDir:'./src' 这样输出目录为当前文件所在目录 ./src/modules
+resolve(__dirname) 默认输出地址是 dist目录, 静态模板在src里，需要在nest-cli.json中配置 compilerOptions assets:['templates/**/*'] 这样会把 templates的内容拷贝到dist中
 
 
 

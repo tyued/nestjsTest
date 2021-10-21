@@ -8,7 +8,9 @@ export class EmailController {
 
     @Post()
     sendMail(@Body() param): string{
+        // console.log(resolve(__dirname,'../../templates'),'__dirname')
         return this.EmailService.sendMail(param);
+        // return 'a'
     }
 
 }

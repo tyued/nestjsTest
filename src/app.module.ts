@@ -1,6 +1,8 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter'
+
+import { resolve } from 'path';
 // import { AppController} from './app.controller';
 // import { AppService } from './app.service';
 import { UserModule } from './module/user/user.module'
@@ -10,7 +12,6 @@ import { EmailModule } from './module/email/email.module'
 
 // 引入中间件
 import { LoggerMiddleware } from './common/middleware/logger.middleware'
-
 
 @Module({
     imports: [
@@ -32,7 +33,7 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware'
             // 模板适配器
             template:{
                 // 指定模板目录 然后在service里指定模板文件*.pug 这里用的是pug模板语言
-                dir: process.cwd() + '/src/templates',
+                dir: resolve(__dirname,'./templates'),
                 adapter: new PugAdapter(),
                 options:{
                     strict: true,
@@ -43,6 +44,7 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware'
   // controllers: [AppController],
   // providers: [AppService],
 })
+
 export class AppModule {
     // consumer 为消费者：apply(应用哪个中间件) exclude(排除哪个路由) forRoutes(给哪个路由添加中间件)
     configure(consumer: MiddlewareConsumer){
