@@ -75,6 +75,13 @@ implements(实现)PipeTransform类 并实现transform方法
 
 guard里需要实现 CanActivate 中的 canActivate方法,具体查看 role.guard.ts
 
+### 邮件服务
+npm install --save @nestjs-modules/mailer nodemailer 安装依赖
+
+目前例子配置在app.module.ts中,也可以单独配置到config中 (这里的密码是授权码，不是登录密码!!!!) 邮件的模板格式可以使用pug模板，导入pugAdapter
+
+操作过程：用户发起post请求 验证参数 -> controller -> 拉起service中对应的方法处理sendMail 
+
 
 
 
