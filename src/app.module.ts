@@ -2,6 +2,8 @@ import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 // import { MailerModule } from '@nestjs-modules/mailer';
 // import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter'
 import { ConfigModule,ConfigService } from 'nestjs-config'
+import { StatusMonitorModule } from 'nest-status-monitor'
+import statusMonitorConfig from './config/statusMonitor'
 
 import { resolve } from 'path';
 // import { AppController} from './app.controller';
@@ -17,11 +19,15 @@ import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
     imports: [
+        // 读取config 下所有的ts,js文件
         ConfigModule.load(resolve(__dirname,'config','**/!(*.d).{ts,js}')),
+        // 设置mailerModule的配置信息
         MailerModule.forRootAsync({
             useFactory: (config: ConfigService) => config.get('email'),
             inject: [ConfigService],
         }),
+        // 服务状态监控
+        StatusMonitorModule.setUp(statusMonitorConfig),
         /**
          * 这里是无配置管理的邮件管理Module
          * by:RayJ

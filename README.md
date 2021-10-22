@@ -87,6 +87,19 @@ resolve(__dirname) 默认输出地址是 dist目录, 静态模板在src里，需
 ### 项目配置管理 @nestjs/config
 npm install --save @nestjs/config 依赖先装
 
+在app.modules.ts里配置config路径和参数。 导入 import { ConfigModule,ConfigService } from 'nestjs-config'
+
+ConfigModule.load() 读取指定文件夹下的所有ts,js文件. 获取并设置具体的配置项 config.get('email');
+
+### 服务监控
+npm install --save @nestjs/platform-socket.io
+
+npm install --save nest-status-monitor
+
+config/statusMonitor.ts配置 监控参数，路径等基本固定，需扩展看其他相关文档，或者自己用nodejs的原生能力做一套监控页面
+
+### jwt 鉴权
+
 
 
 ## Installation
