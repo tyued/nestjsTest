@@ -8,10 +8,13 @@ import statusMonitorConfig from './config/statusMonitor'
 import { resolve } from 'path';
 // import { AppController} from './app.controller';
 // import { AppService } from './app.service';
+// 引入的各个模块
 import { UserModule } from './module/user/user.module'
 import { CatsModule } from './module/cats/cats.module' 
 import { RoleModule } from './module/roleGuard/role-guard.module'
 import { EmailModule } from './module/email/email.module'
+import { AuthModule } from './module/auth/auth.module'
+
 
 // 引入中间件
 import { LoggerMiddleware } from './common/middleware/logger.middleware'
@@ -58,7 +61,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
         //         }
         //     }
         // }),
-        EmailModule,UserModule,CatsModule,RoleModule],
+        EmailModule,UserModule,CatsModule,RoleModule,AuthModule],
+    // providers: [AuthService],
   // controllers: [AppController],
   // providers: [AppService],
 })

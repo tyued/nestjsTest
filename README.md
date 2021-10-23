@@ -99,7 +99,13 @@ npm install --save nest-status-monitor
 config/statusMonitor.ts配置 监控参数，路径等基本固定，需扩展看其他相关文档，或者自己用nodejs的原生能力做一套监控页面
 
 ### jwt 鉴权
+npm install passport passport-jwt passport-local @nestjs/passport @nestjs/jwt -S
 
+npm install --save-dev @types/passport-local
+
+给路由加上守卫 @UseGuards()  AuthGuard('local')本地守卫需要传递 username,password 自动调用local.strategy.ts 中的 validate() 进行验证,期间会调用 authService.validateUser方法,对于用户名和密码进行认证。成功后返回用户对象.. ----这里算是跑完完整的守卫时间..然后进入路由方法里 调用 authService.login() 把用户对象传进去 利用jwtService.sign方法生成并返回 token
+
+其他接口如果用jwt策略守卫 AuthGuard('jwt')就可以,再路由访问前会率先验证header中的token,如果验证通过才能继续接下来的业务方法
 
 
 ## Installation
