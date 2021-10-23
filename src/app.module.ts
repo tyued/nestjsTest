@@ -1,19 +1,21 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 // import { MailerModule } from '@nestjs-modules/mailer';
 // import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter'
-import { ConfigModule,ConfigService } from 'nestjs-config'
+import { ConfigModule, ConfigService } from 'nestjs-config'
 import { StatusMonitorModule } from 'nest-status-monitor'
 import statusMonitorConfig from './config/statusMonitor'
+import { TypeOrmModule } from '@nestjs/typeorm'
 
 import { resolve } from 'path';
 // import { AppController} from './app.controller';
 // import { AppService } from './app.service';
 // 引入的各个模块
 import { UserModule } from './module/user/user.module'
-import { CatsModule } from './module/cats/cats.module' 
+import { CatsModule } from './module/cats/cats.module'
 import { RoleModule } from './module/roleGuard/role-guard.module'
 import { EmailModule } from './module/email/email.module'
 import { AuthModule } from './module/auth/auth.module'
+import { DeptModule } from './module/dept/dept.module';
 
 
 // 引入中间件
@@ -23,12 +25,18 @@ import { MailerModule } from '@nestjs-modules/mailer';
 @Module({
     imports: [
         // 读取config 下所有的ts,js文件
-        ConfigModule.load(resolve(__dirname,'config','**/!(*.d).{ts,js}')),
+        ConfigModule.load(resolve(__dirname, 'config', '**/!(*.d).{ts,js}')),
         // 设置mailerModule的配置信息
         MailerModule.forRootAsync({
             useFactory: (config: ConfigService) => config.get('email'),
             inject: [ConfigService],
         }),
+        // 配置数据库
+        TypeOrmModule.forRootAsync({
+            useFactory: (config: ConfigService) => config.get('database'),
+            inject: [ConfigService],
+        }),
+
         // 服务状态监控
         StatusMonitorModule.setUp(statusMonitorConfig),
         /**
@@ -61,19 +69,17 @@ import { MailerModule } from '@nestjs-modules/mailer';
         //         }
         //     }
         // }),
-        EmailModule,UserModule,CatsModule,RoleModule,AuthModule],
-    // providers: [AuthService],
-  // controllers: [AppController],
-  // providers: [AppService],
+        EmailModule, UserModule, CatsModule, RoleModule, AuthModule,DeptModule],
+    // providers: [AppService],
 })
 
 export class AppModule {
     // consumer 为消费者：apply(应用哪个中间件) exclude(排除哪个路由) forRoutes(给哪个路由添加中间件)
-    configure(consumer: MiddlewareConsumer){
+    configure(consumer: MiddlewareConsumer) {
         // 为 user 路由添加中间件
         consumer
             .apply(LoggerMiddleware)
-            .exclude({path:'user',method:RequestMethod.POST})
+            .exclude({ path: 'user', method: RequestMethod.POST })
             .forRoutes('user');
     }
 }

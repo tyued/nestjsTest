@@ -107,6 +107,11 @@ npm install --save-dev @types/passport-local
 
 其他接口如果用jwt策略守卫 AuthGuard('jwt')就可以,再路由访问前会率先验证header中的token,如果验证通过才能继续接下来的业务方法
 
+### mysql数据库与typeorm
+npm install --save @nestjs/typeorm typeorm sql2
+
+app.module.ts中添加 TypeOrmModule模块, forRootAsync() 读取config中的database.ts
+
 
 ## Installation
 
