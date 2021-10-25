@@ -142,7 +142,14 @@ app.module.ts中添加 schedule定时模块 imports[]中添加scheduleModule.for
 
 @OnQueueActive、@OnQueueError、@OnQueueWaiting、@OnQueueStalled、@OnQueueProgress、@OnQueueCompleted、@OnQueueFailed、@OnQueuePaused、@OnQueueResumed、@OnQueueCleaned、@OnQueueDrained、@OnQueueRemoved 这些都是 Processor处理器的 生命周期的钩子
 
+### 文件上传、打包下载
+npm install --save @types/multer 安装相关插件
 
+在config包里配置文件上传配置，路径，文件包，和文件名等
+
+在file.module.ts中imports connfig中的配置  MulterModule.registerAsync
+
+controller中使用Interceptors 拦截器  获取key为file 的值 然后再调用 @UploadedFile把文件上传到配置文件中设置的位置
 
 
 

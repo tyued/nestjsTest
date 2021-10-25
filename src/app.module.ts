@@ -19,7 +19,7 @@ import { AuthModule } from './module/auth/auth.module'
 import { DeptModule } from './module/dept/dept.module';
 import { QueueModule } from './module/queue/queue.module';
 import { TaskModule } from './module/task/task.module';
-
+import { FileModule } from './module/fileUpload/file.module';
 
 // 引入中间件
 import { LoggerMiddleware } from './common/middleware/logger.middleware'
@@ -75,8 +75,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
         //         }
         //     }
         // }),
-        EmailModule, UserModule, CatsModule, RoleModule, AuthModule, DeptModule, TaskModule,QueueModule],
-        // providers: [],
+        EmailModule, UserModule, CatsModule, RoleModule, AuthModule, DeptModule, TaskModule, QueueModule,FileModule],
+    // providers: [],
 })
 
 export class AppModule {
