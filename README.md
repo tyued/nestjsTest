@@ -131,6 +131,18 @@ app.module.ts中添加 schedule定时模块 imports[]中添加scheduleModule.for
 
 @Interval @Timeout 分别和js的定义相同
 
+### 队列任务
+先添加redis.ts 的配置,配置在queue.module.ts中 和 app.module.ts的配置一样
+
+例子目前是利用redis来完成队列功能
+
+入口controller.ts, 队列处理由 queue.processor.ts来完成。 controller中@InjectQueue插入队列
+
+在post请求接口时 this.queue.add('xxx') 添加一个处理事务到队列中 processor.ts中用 @Process('xxx') 来接受事件处理。
+
+@OnQueueActive、@OnQueueError、@OnQueueWaiting、@OnQueueStalled、@OnQueueProgress、@OnQueueCompleted、@OnQueueFailed、@OnQueuePaused、@OnQueueResumed、@OnQueueCleaned、@OnQueueDrained、@OnQueueRemoved 这些都是 Processor处理器的 生命周期的钩子
+
+
 
 
 
