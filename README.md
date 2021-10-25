@@ -112,6 +112,17 @@ npm install --save @nestjs/typeorm typeorm sql2
 
 app.module.ts中添加 TypeOrmModule模块, forRootAsync() 读取config中的database.ts
 
+Controller 和其他一样无需调整
+
+Service 添加实体entity 并生成Repository对象 操作orm的方法(详见:orm的操作指南,例子中使用了最简单的find()方法)
+
+Module 中imports了实体entity TypeOrmModule.forFeature 这样service中才能使用
+
+Entity 实体层跟数据库表中对应,这里可以做onetomany 等一对多连接,也可以排除一些不必显示的字段比如：密码字段等
+
+
+
+
 
 ## Installation
 
