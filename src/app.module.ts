@@ -1,3 +1,5 @@
+import { TaskModule } from './module/task/task.module';
+
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 // import { MailerModule } from '@nestjs-modules/mailer';
 // import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter'
@@ -5,6 +7,7 @@ import { ConfigModule, ConfigService } from 'nestjs-config'
 import { StatusMonitorModule } from 'nest-status-monitor'
 import statusMonitorConfig from './config/statusMonitor'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { ScheduleModule } from '@nestjs/schedule'
 
 import { resolve } from 'path';
 // import { AppController} from './app.controller';
@@ -39,6 +42,9 @@ import { MailerModule } from '@nestjs-modules/mailer';
 
         // 服务状态监控
         StatusMonitorModule.setUp(statusMonitorConfig),
+
+        // 添加定时任务
+        ScheduleModule.forRoot(),
         /**
          * 这里是无配置管理的邮件管理Module
          * by:RayJ
@@ -69,8 +75,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
         //         }
         //     }
         // }),
-        EmailModule, UserModule, CatsModule, RoleModule, AuthModule,DeptModule],
-    // providers: [AppService],
+        EmailModule, UserModule, CatsModule, RoleModule, AuthModule, DeptModule,TaskModule],
+        // providers: [],
 })
 
 export class AppModule {

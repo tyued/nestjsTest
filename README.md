@@ -120,6 +120,18 @@ Module 中imports了实体entity TypeOrmModule.forFeature 这样service中才能
 
 Entity 实体层跟数据库表中对应,这里可以做onetomany 等一对多连接,也可以排除一些不必显示的字段比如：密码字段等
 
+### 定时任务
+npm install --save @nestjs/schedule 安装相关插件
+
+task目录为定时任务测试文件
+
+app.module.ts中添加 schedule定时模块 imports[]中添加scheduleModule.forRoot(),
+
+在task.service.ts 中添加各个定时条件 @Cron('* * * * * *') 每到一定时间去运行 {秒数} {分钟} {小时} {日期} {月份} {星期} {年份(可为空)}
+
+@Interval @Timeout 分别和js的定义相同
+
+
 
 
 
