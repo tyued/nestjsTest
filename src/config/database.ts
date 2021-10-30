@@ -6,7 +6,7 @@ export default {
     // port: 3306,
     port: 3306,
     username: 'root',
-    password: '123456',
+    password: '******',
     database: 'testdb',
     entities: [join(__dirname,'../','**/**.entity{.ts,.js}')],
     synchronize: true,
