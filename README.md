@@ -28,6 +28,10 @@
 
 ## 学习顺序
 
+$ npm i -g @nestjs/cli
+
+$ nest new project-name
+
 ### 启动nestjs -- 具体查看main.ts
 
 ### 了解controller(控制器) service(服务) module(功能模块)
